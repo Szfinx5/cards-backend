@@ -2,6 +2,7 @@
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": "src",
+    "module": "CommonJS",
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
