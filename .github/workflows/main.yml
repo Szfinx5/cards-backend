@@ -49,7 +49,7 @@ jobs:
           npm run build
 
       - name: Generate deployment package
-        run: zip -r deploy.zip dist package.json package-lock.json
+        run: zip -r deploy.zip dist package.json package-lock.json Procfile
 
       - name: Deploy to Elastic Beanstalk
         uses: einaregilsson/beanstalk-deploy@v22
