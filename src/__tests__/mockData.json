@@ -1,0 +1,32 @@
+{
+  "cards": [
+    {
+      "id": "card001",
+      "title": "test card 1 title",
+      "sizes": ["sm", "gt"],
+      "basePrice": 100,
+      "pages": [{ "templateId": "template005", "title": "Front Cover" }]
+    },
+    {
+      "id": "card002",
+      "title": "test card 2 title",
+      "sizes": ["sm", "md"],
+      "basePrice": 200,
+      "pages": [{ "templateId": "template007", "title": "Inside Page" }]
+    }
+  ],
+  "templates": [
+    {
+      "id": "template005",
+      "width": 300,
+      "height": 600,
+      "imageUrl": "/back-cover-portrait.jpg"
+    },
+    {
+      "id": "template007",
+      "width": 600,
+      "height": 300,
+      "imageUrl": ""
+    }
+  ]
+}
