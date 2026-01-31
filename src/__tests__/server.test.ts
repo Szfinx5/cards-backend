@@ -18,6 +18,12 @@ describe("Cards API Framework", () => {
     expect(res.status).toBe(200);
   });
 
+  it("should return a welcome message", async () => {
+    const res = await request(app).get("/");
+    expect(res.status).toBe(200);
+    expect(res.text).toBe("Welcome to the Cards API");
+  });
+
   it("should return hello from GET /cards", async () => {
     const res = await request(app).get("/api/cards");
     expect(res.status).toBe(200);
@@ -38,5 +44,10 @@ describe("Cards API Framework", () => {
     expect(res.body.message).toEqual(
       "Hello from the Card endpoint for cardId: card001 and sizeId: gt",
     );
+  });
+
+  it("should return 404 for unknown route", async () => {
+    const res = await request(app).get("/unknown/route");
+    expect(res.status).toBe(404);
   });
 });
