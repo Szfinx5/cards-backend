@@ -13,6 +13,13 @@
       "sizes": ["sm", "md"],
       "basePrice": 200,
       "pages": [{ "templateId": "template007", "title": "Inside Page" }]
+    },
+    {
+      "id": "card003",
+      "title": "test card 3 title",
+      "sizes": [],
+      "basePrice": 100,
+      "pages": [{ "templateId": "template005", "title": "Front Cover" }]
     }
   ],
   "templates": [
@@ -27,6 +34,28 @@
       "width": 600,
       "height": 300,
       "imageUrl": ""
+    }
+  ],
+  "sizes": [
+    {
+      "id": "sm",
+      "title": "Small_test",
+      "priceMultiplier": 0.8
+    },
+    {
+      "id": "md",
+      "title": "Medium_test",
+      "priceMultiplier": 1
+    },
+    {
+      "id": "lg",
+      "title": "Large_test",
+      "priceMultiplier": 1.4
+    },
+    {
+      "id": "gt",
+      "title": "Giant_test",
+      "priceMultiplier": 2
     }
   ]
 }
