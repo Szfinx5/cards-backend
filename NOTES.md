@@ -1,5 +1,28 @@
 # Project Notes & Improvement Suggestions
 
+## How to Use
+
+- **Live Demo:**  
+  You can check a live demo of the API here:  
+  [http://moonpig-service-dev.eba-bx7ukerd.eu-west-1.elasticbeanstalk.com](http://moonpig-service-dev.eba-bx7ukerd.eu-west-1.elasticbeanstalk.com)
+
+- **Local Setup & Deployment:**
+  1. **Clone the repository:**
+     ```sh
+     git clone https://github.com/Szfinx5/cards-backend
+     cd cards-backend
+     ```
+  2. **Provision infrastructure (AWS Elastic Beanstalk, S3, IAM) with Terraform:**
+     ```sh
+     cd infra
+     terraform init
+     terraform apply
+     ```
+  3. **Push your change to development and merge it to the `main` branch.**  
+     This will trigger the CI/CD pipeline, which will build and deploy the latest code to AWS Elastic Beanstalk.
+
+---
+
 ## Timebox
 
 All work, including implementation, testing, and documentation, was almost completed within a 4-hour window.
@@ -82,6 +105,8 @@ All work, including implementation, testing, and documentation, was almost compl
 - How should we handle a card with a `basePrice` of 0 or a negative value?
 - Should we support case-insensitive matching for `cardId` and `sizeId`?
 - How should we handle unexpected or additional properties in the input data?
+
+---
 
 ## General Comments
 
