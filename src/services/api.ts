@@ -1,4 +1,4 @@
-import type { Card, Template } from "../types";
+import type { Card, Size, Template } from "../types";
 
 const dataURL = "https://moonpig.github.io/tech-test-node-backend";
 
@@ -16,4 +16,8 @@ export const fetchCardsData = async (): Promise<Card[]> => {
 
 export const fetchTemplateData = async (): Promise<Template[]> => {
   return fetchData("templates.json");
+};
+
+export const fetchSizeData = async (): Promise<Size[]> => {
+  return fetchData("sizes.json");
 };
