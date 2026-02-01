@@ -40,7 +40,7 @@ describe("Cards API Framework", () => {
     });
 
     it("should handle errors if fails to fetch cards data", async () => {
-      // Mock the fetchCardsData, fetchTemplateData, and fetchSizeData to throw errors
+      // Mock the fetchCardsData and fetchTemplateData to throw errors
       const { fetchCardsData, fetchTemplateData } = require("../services/api");
       fetchCardsData.mockRejectedValueOnce(
         new Error("Failed to fetch cards data"),
