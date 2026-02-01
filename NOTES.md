@@ -37,6 +37,14 @@ All work, including implementation, testing, and documentation, was almost compl
 
 ---
 
+## Architecture Diagram
+
+<p align="center">
+  <img src="img/eb-diagram.png" alt="Elastic Beanstalk Architecture Diagram" width="600"/>
+</p>
+
+---
+
 ## Design Decisions & Trade-offs
 
 - **Express.js Monolith:**  
