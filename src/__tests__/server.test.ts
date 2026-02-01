@@ -11,6 +11,10 @@ jest.mock("../services/api", () => {
 });
 
 describe("Cards API Framework", () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
   describe("GET /cards endpoints", () => {
     it("should return card list from GET /cards", async () => {
       const res = await request(app).get("/cards");
@@ -35,14 +39,36 @@ describe("Cards API Framework", () => {
       ]);
     });
 
-    it("should handle errors in GET /cards", async () => {
-      // Mock the fetchCardsData to throw an error
-      const { fetchCardsData } = require("../services/api");
-      fetchCardsData.mockRejectedValueOnce(new Error("Error fetching cards"));
+    it("should handle errors if fails to fetch cards data", async () => {
+      // Mock the fetchCardsData and fetchTemplateData to throw errors
+      const { fetchCardsData, fetchTemplateData } = require("../services/api");
+      fetchCardsData.mockRejectedValueOnce(
+        new Error("Failed to fetch cards data"),
+      );
+      fetchTemplateData.mockRejectedValueOnce(
+        new Error("Failed to fetch template data"),
+      );
 
       const res = await request(app).get("/cards");
       expect(res.status).toBe(500);
-      expect(res.body).toEqual({ error: "Failed to fetch cards" });
+      expect(res.body).toEqual({
+        error: "Failed to fetch cards data; Failed to fetch template data",
+      });
+    });
+
+    it("should handle unexpected errors in GET /cards (catch block)", async () => {
+      // Mocking an error in transformToCardsList function
+      jest
+        .spyOn(require("../services/utils"), "transformToCardsList")
+        .mockImplementation(() => {
+          throw new Error("Unexpected error in transformToCardsList");
+        });
+
+      const res = await request(app).get("/cards");
+      expect(res.status).toBe(500);
+      expect(res.body).toEqual({
+        error: "Unexpected error occurred while fetching cards",
+      });
     });
   });
 
@@ -117,14 +143,44 @@ describe("Cards API Framework", () => {
       expect(res.body).toEqual({ error: "Card is not available in any size" });
     });
 
-    it("should handle errors if fetchCardsData throws an error", async () => {
-      // Mock the fetchCardsData to throw an error
-      const { fetchCardsData } = require("../services/api");
-      fetchCardsData.mockRejectedValueOnce(new Error("Error fetching cards"));
+    it("should handle errors if fails to fetch cards data", async () => {
+      // Mock the fetchCardsData, fetchTemplateData, and fetchSizeData to throw errors
+      const {
+        fetchCardsData,
+        fetchTemplateData,
+        fetchSizeData,
+      } = require("../services/api");
+      fetchCardsData.mockRejectedValueOnce(
+        new Error("Failed to fetch cards data"),
+      );
+      fetchTemplateData.mockRejectedValueOnce(
+        new Error("Failed to fetch template data"),
+      );
+      fetchSizeData.mockRejectedValueOnce(
+        new Error("Failed to fetch size data"),
+      );
 
       const res = await request(app).get("/cards/card001/gt");
       expect(res.status).toBe(500);
-      expect(res.body).toEqual({ error: "Failed to fetch card data" });
+      expect(res.body).toEqual({
+        error:
+          "Failed to fetch cards data; Failed to fetch template data; Failed to fetch size data",
+      });
+    });
+
+    it("should handle unexpected errors in GET /cards/:cardId/:sizeId? (catch block)", async () => {
+      // Mocking an error in buildCardDetail function
+      jest
+        .spyOn(require("../services/utils"), "buildCardDetail")
+        .mockImplementation(() => {
+          throw new Error("Unexpected error in buildCardDetail");
+        });
+
+      const res = await request(app).get("/cards/card001");
+      expect(res.status).toBe(500);
+      expect(res.body).toEqual({
+        error: "Unexpected error occurred while fetching card data",
+      });
     });
   });
 
